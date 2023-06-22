@@ -110,18 +110,19 @@ module.exports = {
     "no-unused-vars": ["error", { ignoreRestSiblings: true }],
 
     // TODO
-    // 'react/display-name': [1, { ignoreTranspilerName: true }],
     // 'react/no-array-index-key': 1,
     // 'react/forbid-prop-types': 1,
     // 'react/jsx-no-bind': 1,
     // 'react/no-danger': 1,
-    // 'react/require-default-props': 1,
 
+    "react/display-name": [1, { ignoreTranspilerName: true }],
     "react/function-component-definition": [
       2,
       { namedComponents: "arrow-function" },
     ],
     "react/forbid-component-props": [2, { forbid: ["style"] }],
+    "react/require-default-props": 0,
+    "react/sort-default-props": 0,
     "react/jsx-handler-names": 0,
     "react/destructuring-assignment": 0,
     "react/hook-use-state": 0,
