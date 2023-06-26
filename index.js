@@ -31,7 +31,7 @@ module.exports = {
   },
   overrides: [
     {
-      files: ["*.test.jsx"],
+      files: ["*.test.jsx", "**/previews/*.jsx"],
       rules: {
         "react/jsx-no-bind": "off",
         "no-undef": "off",
