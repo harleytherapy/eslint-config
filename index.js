@@ -122,6 +122,7 @@ module.exports = {
     ],
     "react/forbid-component-props": [2, { forbid: ["style"] }],
     "react/require-default-props": 0,
+    "react/no-unused-prop-types": 0,
     "react/sort-default-props": 0,
     "react/jsx-handler-names": 0,
     "react/destructuring-assignment": 0,
