@@ -111,7 +111,6 @@ module.exports = {
 
     // TODO
     // 'react/no-array-index-key': 1,
-    // 'react/forbid-prop-types': 1,
     // 'react/jsx-no-bind': 1,
     // 'react/no-danger': 1,
 
@@ -121,6 +120,7 @@ module.exports = {
       { namedComponents: "arrow-function" },
     ],
     "react/forbid-component-props": [2, { forbid: ["style"] }],
+    "react/forbid-prop-types": 0,
     "react/require-default-props": 0,
     "react/no-unused-prop-types": 0,
     "react/sort-default-props": 0,
