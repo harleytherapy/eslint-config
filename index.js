@@ -111,9 +111,9 @@ module.exports = {
 
     // TODO
     // 'react/no-array-index-key': 1,
-    // 'react/jsx-no-bind': 1,
     // 'react/no-danger': 1,
 
+    "react/jsx-no-bind": [1, { allowArrowFunctions: true }],
     "react/display-name": [1, { ignoreTranspilerName: true }],
     "react/function-component-definition": [
       2,
