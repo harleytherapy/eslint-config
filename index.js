@@ -86,6 +86,7 @@ module.exports = {
     "unicorn/no-reduce": "off",
     "unicorn/no-array-for-each": "off",
     "unicorn/prefer-string-slice": "warn",
+    "unicorn/no-anonymous-default-export": "off",
 
     "jsx-a11y/click-events-have-key-events": "off",
     "jsx-a11y/mouse-events-have-key-events": "off",
