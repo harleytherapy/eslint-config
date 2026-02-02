@@ -9,7 +9,9 @@ import { fileURLToPath } from 'node:url'
 import js from '@eslint/js'
 import { FlatCompat } from '@eslint/eslintrc'
 import eslintPluginUnicorn from 'eslint-plugin-unicorn'
+import reactHooks from 'eslint-plugin-react-hooks'
 import css from '@eslint/css'
+import jsxA11y from 'eslint-plugin-jsx-a11y'
 import eslintPluginPrettierRecommended from 'eslint-plugin-prettier/recommended'
 
 const __filename = fileURLToPath(import.meta.url)
@@ -36,15 +38,13 @@ export default defineConfig([
   {
     files: ['**/*.js', '**/*.jsx'],
 
-    extends: fixupConfigRules(
-      compat.extends('plugin:react-hooks/recommended', 'plugin:jsx-a11y/recommended')
-    ),
-
     plugins: {
       react: reactPlugin,
+      'react-hooks': reactHooks,
       unicorn: eslintPluginUnicorn,
       'simple-import-sort': simpleImportSort,
-      import: fixupPluginRules(_import)
+      import: fixupPluginRules(_import),
+      'jsx-a11y': jsxA11y
     },
 
     languageOptions: {
@@ -73,6 +73,8 @@ export default defineConfig([
       ...eslintPluginUnicorn.configs.recommended.rules,
       ...reactPlugin.configs.flat.recommended.rules,
       ...reactPlugin.configs.flat['jsx-runtime'].rules,
+      ...reactHooks.configs.flat.recommended.rules,
+      ...jsxA11y.flatConfigs.recommended.rules,
 
       'simple-import-sort/imports': [
         'error',

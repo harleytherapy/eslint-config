@@ -1,13 +1,10 @@
 {
   "name": "@harleytherapy/eslint-config",
-  "version": "0.9.0",
+  "version": "0.10.0",
   "description": "",
   "type": "module",
   "main": "index.js",
-  "engines": {
-    "node": "23.7.0"
-  },
-  "packageManager": "pnpm@10.7.0",
+  "packageManager": "pnpm@10.28.2+sha512.41872f037ad22f7348e3b1debbaf7e867cfd448f2726d9cf74c08f19507c31d2c8e7a11525b983febc2df640b5438dee6023ebb1f84ed43cc2d654d2bc326264",
   "publishConfig": {
     "registry": "https://npm.pkg.github.com"
   },
@@ -26,18 +23,19 @@
     "eslint": "^9.23.0"
   },
   "dependencies": {
-    "@eslint/compat": "^1.2.7",
-    "@eslint/css": "^0.6.0",
-    "@eslint/js": "^9.23.0",
-    "eslint-plugin-import": "^2.31.0",
+    "@eslint/compat": "^2.0.2",
+    "@eslint/css": "^0.14.1",
+    "@eslint/js": "^9.39.2",
+    "eslint-config-prettier": "^10.1.8",
+    "eslint-plugin-import": "^2.32.0",
     "eslint-plugin-jsx-a11y": "^6.10.2",
-    "eslint-plugin-prettier": "^5.2.5",
-    "eslint-plugin-react": "^7.37.4",
-    "eslint-plugin-react-hooks": "^5.2.0",
+    "eslint-plugin-prettier": "^5.5.5",
+    "eslint-plugin-react": "^7.37.5",
+    "eslint-plugin-react-hooks": "^7.0.1",
     "eslint-plugin-simple-import-sort": "^12.1.1",
-    "eslint-plugin-unicorn": "^58.0.0"
+    "eslint-plugin-unicorn": "^62.0.0"
   },
   "devDependencies": {
-    "prettier": "^3.5.3"
+    "prettier": "^3.8.1"
   }
 }

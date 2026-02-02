@@ -1,0 +1,8 @@
+[hooks]
+postinstall = "corepack enable"
+
+[env]
+# Project information
+PROJECT_NAME = "{{ config_root | basename }}"
+_.path = ["{{config_root}}/node_modules/.bin"]
+_.file = [".env"]
