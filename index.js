@@ -1,26 +1,23 @@
-import { defineConfig } from 'eslint/config'
-import reactPlugin from 'eslint-plugin-react'
-import { fixupConfigRules, fixupPluginRules } from '@eslint/compat'
-import simpleImportSort from 'eslint-plugin-simple-import-sort'
-import _import from 'eslint-plugin-import'
-import globals from 'globals'
-import path from 'node:path'
-import { fileURLToPath } from 'node:url'
-import js from '@eslint/js'
-import { FlatCompat } from '@eslint/eslintrc'
-import eslintPluginUnicorn from 'eslint-plugin-unicorn'
-import reactHooks from 'eslint-plugin-react-hooks'
+import { fixupPluginRules } from '@eslint/compat'
 import css from '@eslint/css'
+import { defineConfig } from 'eslint/config'
+import baselineJs from 'eslint-plugin-baseline-js'
+import _import from 'eslint-plugin-import'
 import jsxA11y from 'eslint-plugin-jsx-a11y'
 import eslintPluginPrettierRecommended from 'eslint-plugin-prettier/recommended'
+import reactPlugin from 'eslint-plugin-react'
+import reactHooks from 'eslint-plugin-react-hooks'
+import simpleImportSort from 'eslint-plugin-simple-import-sort'
+import eslintPluginUnicorn from 'eslint-plugin-unicorn'
+import globals from 'globals'
 
-const __filename = fileURLToPath(import.meta.url)
-const __dirname = path.dirname(__filename)
-const compat = new FlatCompat({
-  baseDirectory: __dirname,
-  recommendedConfig: js.configs.recommended,
-  allConfig: js.configs.all
-})
+// The browsers we support: Baseline 2023 (Chrome/Edge 120, Firefox 121, Safari 17.2). JS APIs, CSS
+// selectors, properties and values are checked against it. The build (Proscenium/esbuild, target
+// ES2022) lowers newer JS syntax and CSS nesting, so those never reach the browser as written.
+//
+// The lint can't see instance methods (`el.showPopover()`, `arr.toSorted()`) without type
+// information, so test on the floor's real browsers too.
+export const BASELINE = 2023
 
 export default defineConfig([
   {
@@ -44,7 +41,8 @@ export default defineConfig([
       unicorn: eslintPluginUnicorn,
       'simple-import-sort': simpleImportSort,
       import: fixupPluginRules(_import),
-      'jsx-a11y': jsxA11y
+      'jsx-a11y': jsxA11y,
+      'baseline-js': baselineJs
     },
 
     languageOptions: {
@@ -80,18 +78,18 @@ export default defineConfig([
         'error',
         {
           groups: [
-            ['^react', '^@?\\w'],
+            ['^react', String.raw`^@?\w`],
             [
-              '^\\/',
-              '^\\.\\.(?!/?$)',
-              '^\\.\\./?$',
-              '^\\./(?=.*/)(?!/?$)',
-              '^bundle-all:\\.(?!/?$)',
-              '^bundle:\\.(?!/?$)',
-              '^\\.(?!/?$)',
-              '^\\./?$'
+              String.raw`^\/`,
+              String.raw`^\.\.(?!/?$)`,
+              String.raw`^\.\./?$`,
+              String.raw`^\./(?=.*/)(?!/?$)`,
+              String.raw`^bundle-all:\.(?!/?$)`,
+              String.raw`^bundle:\.(?!/?$)`,
+              String.raw`^\.(?!/?$)`,
+              String.raw`^\./?$`
             ],
-            ['^.+\\.css$']
+            [String.raw`^.+\.css$`]
           ]
         }
       ],
@@ -130,6 +128,19 @@ export default defineConfig([
       'jsx-a11y/no-onchange': 'off',
       'jsx-a11y/label-has-for': 'off',
       'jsx-a11y/label-has-associated-control': 'off',
+
+      'baseline-js/use-baseline': [
+        'error',
+        {
+          available: BASELINE,
+          // Both default to off, which leaves only syntax checked.
+          includeWebApis: { preset: 'auto' },
+          includeJsBuiltins: { preset: 'auto' },
+          // web-features lists Safari 27 for it, over a spec-conformance detail. Safari has run it
+          // since 15, and ES2022 output keeps it as written.
+          ignoreFeatures: ['top-level-await']
+        }
+      ],
 
       indent: [
         'error',
@@ -253,7 +264,9 @@ export default defineConfig([
     },
     rules: {
       'css/no-empty-blocks': 'error',
-      'css/no-duplicate-imports': 'error'
+      'css/no-duplicate-imports': 'error',
+      // Nesting is lowered by the build.
+      'css/use-baseline': ['error', { available: BASELINE, allowSelectors: ['nesting'] }]
     }
   },
 
