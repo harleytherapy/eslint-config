@@ -129,14 +129,22 @@ export default defineConfig([
       'unicorn/prefer-promise-with-resolvers': 'off',
       'unicorn/prefer-iterator-to-array': 'off',
       'unicorn/prefer-iterator-helpers': 'off',
-      // Module state and globalThis hooks are deliberate here.
+      // Module state and globalThis hooks are deliberate here. no-unnecessary-global-this's fix
+      // also turns a `globalThis.Sentry` probe into a bare `Sentry`, which throws when undefined.
       'unicorn/no-top-level-assignment-in-function': 'off',
       'unicorn/no-global-object-property-assignment': 'off',
       'unicorn/no-this-outside-of-class': 'off',
+      'unicorn/no-unnecessary-global-this': 'off',
+      'unicorn/no-top-level-side-effects': 'off',
+      // Flags members assigned at runtime (`this.menu = …`).
+      'unicorn/no-undeclared-class-members': 'off',
       // Style-only renames and rewrites, mostly not autofixable.
       'unicorn/name-replacements': 'off',
       'unicorn/consistent-boolean-name': 'off',
       'unicorn/no-for-each': 'off',
+      'unicorn/consistent-class-member-order': 'off',
+      // Hand rewrites of promise chains, which can shift timing.
+      'unicorn/prefer-await': 'off',
       // Wants `export default function X() {}`, which react/function-component-definition forbids.
       'unicorn/default-export-style': 'off',
       'jsx-a11y/click-events-have-key-events': 'off',
