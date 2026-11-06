@@ -160,9 +160,11 @@ export default defineConfig([
           // Both default to off, which leaves only syntax checked.
           includeWebApis: { preset: 'auto' },
           includeJsBuiltins: { preset: 'auto' },
-          // web-features lists Safari 27 for it, over a spec-conformance detail. Safari has run it
-          // since 15, and ES2022 output keeps it as written.
-          ignoreFeatures: ['top-level-await']
+          // - top-level-await: web-features lists Safari 27, over a spec-conformance detail. Safari
+          //   has run it since 15, and ES2022 output keeps it as written.
+          // - gpc: navigator.globalPrivacyControl is only ever read as a boolean.
+          // - devicepixelratio: supported everywhere; web-features marks a sub-feature limited.
+          ignoreFeatures: ['top-level-await', 'gpc', 'devicepixelratio']
         }
       ],
 
@@ -289,8 +291,30 @@ export default defineConfig([
     rules: {
       'css/no-empty-blocks': 'error',
       'css/no-duplicate-imports': 'error',
-      // Nesting is lowered by the build.
-      'css/use-baseline': ['error', { available: BASELINE, allowSelectors: ['nesting'] }]
+      'css/use-baseline': [
+        'error',
+        {
+          available: BASELINE,
+          // Nesting is lowered by the build. Everything else here is newer than BASELINE but
+          // harmlessly ignored where unsupported, so the page still works without it.
+          allowSelectors: ['nesting', 'marker'],
+          allowAtRules: ['starting-style'],
+          allowProperties: [
+            'backdrop-filter',
+            'line-clamp',
+            'overflow-clip-margin',
+            'overscroll-behavior',
+            'resize',
+            'scrollbar-width',
+            'user-select',
+            'zoom'
+          ],
+          allowPropertyValues: {
+            'background-attachment': ['fixed'],
+            'font-family': ['ui-monospace']
+          }
+        }
+      ]
     }
   },
 
