@@ -137,6 +137,8 @@ export default defineConfig([
       'unicorn/name-replacements': 'off',
       'unicorn/consistent-boolean-name': 'off',
       'unicorn/no-for-each': 'off',
+      // Wants `export default function X() {}`, which react/function-component-definition forbids.
+      'unicorn/default-export-style': 'off',
       'jsx-a11y/click-events-have-key-events': 'off',
       'jsx-a11y/mouse-events-have-key-events': 'off',
       'jsx-a11y/no-onchange': 'off',
