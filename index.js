@@ -145,6 +145,16 @@ export default defineConfig([
       'unicorn/consistent-class-member-order': 'off',
       // Hand rewrites of promise chains, which can shift timing.
       'unicorn/prefer-await': 'off',
+      // Their rewrites change behaviour on real input: `Number('12px')` and `Number('£1.00')`
+      // are NaN where parseFloat reads the number, and `Number('')` is 0.
+      'unicorn/prefer-number-coercion': 'off',
+      // A default parameter only replaces `undefined`, where `x || y` also replaces null and ''.
+      'unicorn/prefer-default-parameters': 'off',
+      // Wants Object.hasOwn, which misses prototype methods (`'onFoo' in this`) and changes
+      // boolean-map reads.
+      'unicorn/no-computed-property-existence-check': 'off',
+      // toggleAttribute can only write `name=""`, so it can't replace an attribute with a value.
+      'unicorn/prefer-toggle-attribute': 'off',
       // Wants `export default function X() {}`, which react/function-component-definition forbids.
       'unicorn/default-export-style': 'off',
       'jsx-a11y/click-events-have-key-events': 'off',
