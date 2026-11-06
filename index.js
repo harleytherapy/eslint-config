@@ -123,6 +123,20 @@ export default defineConfig([
       'unicorn/no-array-for-each': 'off',
       'unicorn/prefer-string-slice': 'warn',
       'unicorn/no-anonymous-default-export': 'off',
+      // Their fixes reach for APIs newer than BASELINE (getHTML/setHTML, Promise.withResolvers,
+      // iterator helpers).
+      'unicorn/prefer-dom-node-html-methods': 'off',
+      'unicorn/prefer-promise-with-resolvers': 'off',
+      'unicorn/prefer-iterator-to-array': 'off',
+      'unicorn/prefer-iterator-helpers': 'off',
+      // Module state and globalThis hooks are deliberate here.
+      'unicorn/no-top-level-assignment-in-function': 'off',
+      'unicorn/no-global-object-property-assignment': 'off',
+      'unicorn/no-this-outside-of-class': 'off',
+      // Style-only renames and rewrites, mostly not autofixable.
+      'unicorn/name-replacements': 'off',
+      'unicorn/consistent-boolean-name': 'off',
+      'unicorn/no-for-each': 'off',
       'jsx-a11y/click-events-have-key-events': 'off',
       'jsx-a11y/mouse-events-have-key-events': 'off',
       'jsx-a11y/no-onchange': 'off',
